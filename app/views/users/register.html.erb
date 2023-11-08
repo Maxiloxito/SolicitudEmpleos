@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <%= stylesheet_link_tag 'logincss', media: 'all' %>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1 class="login-title">Registro</h1>
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@user.errors.count, "error") %> prohibió que este usuario fuera guardado:</h2>
+                <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            </div>
+
+        <% end %>
+        <%= form_for User.new, url: register_path do |f| %>
+            <%= f.text_field :first_name, class: 'login-input', placeholder: 'Nombre', required: true %>
+            <%= f.text_field :last_name, class: 'login-input', placeholder: 'Apellido', required: true %>
+            <%= f.email_field :email, class: 'login-input', placeholder: 'Email', required: true %>
+            <%= f.text_field :contact, class: 'login-input', placeholder: 'Número de contacto', required: true %>
+            <%= f.password_field :password, class: 'login-input', placeholder: 'Contraseña', required: true %>
+            <%= f.password_field :password_confirmation, class: 'login-input', placeholder: 'Confirmar contraseña', required: true %>
+            <%= f.text_field :location, class: 'login-input', placeholder: 'Ubicación', required: true %>
+            <%= f.select :engineering_type, ['Ingeniería civil informática', 'Ingeniería civil industrial','Ingeniería civil ambiental','Ingeniería civil metalurgia','Ingeniería civil electronica'], {}, class: 'login-input' %>
+            <div class="form-group">
+            <p>Idiomas:</p>
+            <% ['Español', 'Inglés', 'Ruso', 'Portugues', 'Japonés', 'Mandarín(Chino)', 'Italiano', 'Árabe', 'Coreano'].each do |language| %>
+              <div class="form-check">
+                <%= f.check_box :languages, { multiple: true }, language %>
+                <%= label_tag "user_languages_#{language.downcase}", language %>
+              </div>
+            <% end %>            
+            <%= f.number_field :experience, class: 'login-input', placeholder: 'Experiencia laboral', required: true %>
+            <%= f.file_field :resume, class: 'login-input', accept: 'application/pdf' %>
+            <%= f.file_field :profile_picture, class: 'login-input', accept: 'image/png,image/jpeg' %>
+            <%= f.select :role, User.roles.keys, {}, class: 'register-input' %>
+            <%= f.submit "Registrarse", class: 'login-button' %>
+        <% end %>
+        
+
+        <p style="text-align: center;">¿Ya tienes una cuenta? <%= link_to "Inicia sesión aquí", login_path %></p>
+
+    </div>
+</body>
+</html>
+

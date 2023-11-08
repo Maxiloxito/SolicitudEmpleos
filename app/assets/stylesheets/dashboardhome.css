@@ -1,0 +1,125 @@
+/* Agregar fuentes personalizadas */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap");
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #d4d4d4;
+    margin: 0;
+}
+
+/* Cabecera */
+header {
+    background-color: #222224;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    width: 100%; 
+}
+
+
+/* Barra de navegación */
+nav {
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; 
+    
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 5px;
+    margin: 0; /* Elimina las comas en el valor del margen */
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    width: 100%; /* Establece el ancho al 100% */
+}
+
+nav li {
+    margin: 10px;
+    flex: 1; /* Distribuye el espacio disponible de manera uniforme */
+    text-align: center; /* Centra el contenido horizontalmente */
+}
+
+/* Cambiar el tipo de letra y decoración de los enlaces de navegación */
+nav a {
+    text-decoration: none;
+    color: black; /* Cambiar el color de los enlaces */
+    font-family: 'Poppins', sans-serif; /* Cambiar el tipo de letra */
+    font-weight: bold; /* Agregar negrita al texto */
+}
+
+/* Sección de ofertas de trabajo */
+.job-offers {
+    margin-top: 20px;
+}
+
+.job-offers h2 {
+    font-size: 24px;
+}
+
+.job-offers ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.job-offers li {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.job-offers h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.job-offers p {
+    margin: 0;
+}
+
+/* Estilo para el enlace "Cargar Oferta de Trabajo" */
+.btn.btn-color-1 {
+    background-color: #4285f4; /* Cambia el color de fondo a tu preferencia */
+    color: #fff; /* Cambia el color del texto a tu preferencia */
+    padding: 10px 20px; /* Ajusta el relleno según tus necesidades */
+    text-decoration: none;
+    border: none;
+    border-radius: 4px; /* Añade bordes redondeados si lo deseas */
+    cursor: pointer;
+}
+
+/* Estilo cuando se pasa el cursor sobre el enlace (hover) */
+.btn.btn-color-1:hover {
+    background-color: #357ABD; /* Cambia el color de fondo al pasar el cursor */
+    color: #fff; /* Cambia el color del texto al pasar el cursor */
+    /* Puedes ajustar otros estilos al pasar el cursor según tus preferencias */
+}
+
+/* Estilo para el botón "Ver Postulantes" */
+.btn.btn-primary {
+    background-color: #4285f4;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilo cuando se pasa el cursor sobre el botón (hover) */
+.btn.btn-primary:hover {
+    background-color: #357ABD;
+    color: #fff;
+    /* Puedes ajustar otros estilos al pasar el cursor según tus preferencias */
+}
+
+.logout-button {
+    font-size: 14px;
+    color: #444;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}

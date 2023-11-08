@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editar Perfil</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f8f9fa;
+    color: rgb(85, 85, 85); /* Text color */
+  }
+
+  .form-header {
+    background-color: #343a40;
+    color: #fff;
+  }
+
+  .card {
+    border-color: rgb(163, 163, 163); 
+  }
+
+  .btn-primary {
+    background-color: rgb(53, 53, 53); 
+    border-color: rgb(53, 53, 53); 
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(0, 0, 0); 
+  }
+
+  .btn-secondary {
+    background-color: #fff;
+    border-color: rgb(163, 163, 163); 
+    color: rgb(53, 53, 53);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgb(53, 53, 53); 
+    color: #fff;
+  }
+
+  .form-control, .form-control-file {
+    color: rgb(85, 85, 85);
+  }
+
+  .form-control:focus {
+    border-color: rgb(53, 53, 53);
+    box-shadow: 0 0 0 0.2rem rgba(53, 53, 53, 0.25); 
+  }
+
+  .file-input-button {
+    background-color: rgb(53, 53, 53); 
+    border-color: rgb(53, 53, 53);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    text-decoration: none;
+  }
+
+  .file-input-button:hover {
+    background-color: rgb(0, 0, 0);
+  }
+
+  .file-input {
+    display: none;
+  }
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 20px auto; 
+    cursor: pointer; 
+  }
+
+  .edit-image-message {
+    display: none;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .file-input {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="card border-0 shadow-lg">
+    <div class="card-header form-header">
+      <h2 class="mb-0">Editar Perfil</h2>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: @user, local: true, html: { multipart: true }) do |form| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibieron que este formulario se guardara:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="profile-picture-container">
+            <%= form.file_field :profile_picture, id: "profile_picture", class: "file-input" %>
+            <label for="profile_picture">
+                <% if @user.profile_picture.attached? %>
+                    <%= image_tag @user.profile_picture, class: 'profile-picture' %>
+                <% else %>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="profile-picture" viewBox="0 0 16 16">
+                      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                  </svg>  
+                <% end %>
+            </label>
+            <div class="edit-image-message">Editar imagen</div>
+        </div>
+
+    
+        
+        <div class="mb-3">
+          <label for="first_name" class="form-label">Nombre</label>
+          <%= form.text_field :first_name, class: "form-control", required: true %>
+        </div>
+        
+        <div class="mb-3">
+          <label for="last_name" class="form-label">Apellido</label>
+          <%= form.text_field :last_name, class: "form-control", required: true %>
+        </div>
+        
+        <div class="mb-3">
+          <label for="experience" class="form-label">Experiencia Laboral</label>
+          <%= form.number_field :experience, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+        <p>Idiomas:</p>
+        <% selected_languages = @user.languages.map(&:strip).select { |lang| lang != '0' } %>
+        <% ['Español', 'Inglés', 'Ruso', 'Portugues', 'Japonés', 'Mandarín(Chino)', 'Italiano', 'Árabe', 'Coreano'].each do |language| %>
+          <div class="form-check">
+            <%= form.check_box :languages, { multiple: true, checked: selected_languages.include?(language) }, language, nil %>
+            <%= label_tag "user_languages_#{language.downcase}", language %>
+          </div>
+       <% end %>
+        
+    
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <%= form.email_field :email, class: "form-control", required: true %>
+        </div>
+        
+        <div class="mb-3">
+          <label for="location" class="form-label">Ubicación</label>
+          <%= form.text_field :location, class: "form-control", required: true %>
+        </div>
+        
+        <div class="mb-3">
+          <label for="contact" class="form-label">Contacto</label>
+          <%= form.text_field :contact, class: "form-control", required: true %>
+        </div>
+
+        
+        <div class="mb-3">
+          <label for="engineering_type" class="form-label">Tipo de Ingeniería</label>
+          <%= form.select :engineering_type, ['Ingeniería civil informática', 'Ingeniería civil industrial','Ingeniería civil ambiental','Ingeniería civil metalurgia','Ingeniería civil electronica'], {}, { class: 'form-control', required: true } %>
+        </div>
+
+
+        
+        
+        <p>Seleccione un archivo para el Currículum:</p>
+        <label for="resume" class="file-input-button">Seleccionar Archivo</label>
+        <%= form.file_field :resume, id: "resume", class: "file-input" %>
+
+
+        <div class="text-center mt-4">
+          <%= form.submit "Actualizar", class: "btn btn-primary" %>
+          <%= link_to 'Volver', dashboard_path, class: "btn btn-secondary" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#profile_picture").change(function(){
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.profile-picture').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+</script>
+</body>
+</html>

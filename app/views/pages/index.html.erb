@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <%= stylesheet_link_tag 'style.css', media: 'all' %>  
+  </head>
+  <body>
+    <nav id="desktop-nav">
+      <div class="logo">ICCI</div>
+      <div>
+        <ul class="nav-links">
+          <li><a href="#">Acerca de</a></li>
+
+
+        </ul>
+      </div>
+    </nav>
+    <section id="Imagen">
+      <div class="section-pic-container">
+        <%= image_tag("giphy.gif")%>
+
+      </div>
+      <div class="section-text">
+        <p class="section-text-p1">¿Buscas trabajo? <br>
+        <h1 class="title">Manda tu curriculum</h1>
+        <p class="section-text-p2">Aqui</p>
+        <div class="btn-container">
+          <%= link_to "Iniciar Sesion", login_path, class: "btn btn-color-1" %>
+        </div>
+    </section>
+    <section id="about">
+      <h1 class="title">Acerca de nosotros</h1>
+      <div class="section-container">
+        <div class="about-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <h3>Datos</h3>
+              <p>
+               Aquí podrás ver las ofertas de trabajo que se te ofrecen
+                <br /><br />
+                ¿Sabias que? este trabajo fue realizado por Maximiliano Verdejo y Romina Marcoleta?.
+              </p>
+            </div>
+          </div>
+          <div class="text-container">
+            <p>
+              <h1>"Turip ip ip" es un lenguaje de programacion tester entregado por la india.</h1>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#">alo</a></li>
+          </ul>
+        </div>
+      </nav>
+    </footer>
+  </body>
+</html>
